@@ -1353,6 +1353,11 @@
     </description>
   </property>
 
+	<property>
+		<name>fs.cosn.impl</name>
+		<value>org.apache.flink.fs.shaded.hadoop3.org.apache.hadoop.fs.CosFileSystem</value>
+	</property>
+
   <!-- Azure file system properties -->
   <property>
     <name>fs.wasb.impl</name>
