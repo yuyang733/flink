@@ -15,7 +15,7 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<fs.cos.sdk.version>5.6.8</fs.cos.sdk.version>
+		<fs.cos.sdk.version>5.6.19</fs.cos.sdk.version>
 	</properties>
 
 	<dependencies>
@@ -24,6 +24,12 @@
 			<artifactId>flink-core</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-hadoop-fs</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 		<!-- Hadoop's file system abstraction (bundled) -->
@@ -35,14 +41,8 @@
 
 		<!-- The Hadoop file system adapter classes (bundled) -->
 		<dependency>
-			<groupId>org.apache.flink</groupId>
-			<artifactId>flink-hadoop-fs</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>com.qcloud</groupId>
-			<artifactId>cos_api</artifactId>
+			<artifactId>cos_api-bundle</artifactId>
 			<version>${fs.cos.sdk.version}</version>
 		</dependency>
 
@@ -53,7 +53,7 @@
 			<exclusions>
 				<exclusion>
 					<groupId>com.qcloud</groupId>
-					<artifactId>cos_api</artifactId>
+					<artifactId>cos_api-bundle</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -91,11 +91,6 @@
 
 								<!-- shade dependencies internally used by Hadoop and never exposed downstream -->
 								<relocation>
-									<pattern>org.apache.commons</pattern>
-									<shadedPattern>org.apache.flink.fs.shaded.hadoop3.org.apache.commons</shadedPattern>
-								</relocation>
-
-								<relocation>
 									<pattern>org.apache.hadoop</pattern>
 									<shadedPattern>org.apache.flink.fs.shaded.hadoop3.org.apache.hadoop</shadedPattern>
 								</relocation>
@@ -106,69 +101,6 @@
 									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.com.qcloud.cos</shadedPattern>
 								</relocation>
 
-								<relocation>
-									<pattern>org.apache.http</pattern>
-									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.org.apache.http</shadedPattern>
-								</relocation>
-
-								<relocation>
-									<pattern>net.iharder</pattern>
-									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.net.iharder</shadedPattern>
-								</relocation>
-
-								<relocation>
-									<pattern>org.mortbay</pattern>
-									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.org.mortbay</shadedPattern>
-								</relocation>
-
-								<relocation>
-									<pattern>org.jets3t</pattern>
-									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.org.jets3t</shadedPattern>
-								</relocation>
-
-								<relocation>
-									<pattern>org.bouncycastle</pattern>
-									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.org.bouncycastle</shadedPattern>
-								</relocation>
-
-								<relocation>
-									<pattern>org.joda</pattern>
-									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.org.joda</shadedPattern>
-								</relocation>
-
-								<relocation>
-									<pattern>org.codehaus</pattern>
-									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.org.codehaus</shadedPattern>
-								</relocation>
-
-								<relocation>
-									<pattern>com.fasterxml</pattern>
-									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.com.fasterxml</shadedPattern>
-								</relocation>
-
-								<relocation>
-									<pattern>com.jamesmurty.utils</pattern>
-									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.com.jamesmurty.utils
-									</shadedPattern>
-								</relocation>
-
-								<relocation>
-									<pattern>com.google</pattern>
-									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.com.google</shadedPattern>
-								</relocation>
-
-								<relocation>
-									<pattern>org.apache.flink.runtime.fs.hdfs</pattern>
-									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.org.apache.flink.runtime.fs.hdfs</shadedPattern>
-								</relocation>
-
-								<relocation>
-									<pattern>org.apache.flink.runtime.util</pattern>
-									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.org.apache.flink.runtime.util</shadedPattern>
-									<includes>
-										<include>org.apache.flink.runtime.util.**Hadoop*</include>
-									</includes>
-								</relocation>
 							</relocations>
 
 							<filters>
