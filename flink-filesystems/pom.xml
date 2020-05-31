@@ -48,7 +48,9 @@ under the License.
 		<module>flink-swift-fs-hadoop</module>
 		<module>flink-oss-fs-hadoop</module>
 		<module>flink-azure-fs-hadoop</module>
-	</modules>
+        <module>flink-cos-fs-base</module>
+		<module>flink-cos-fs-hadoop</module>
+    </modules>
 
 	<!-- Common dependency setup for all filesystems -->
 	<dependencies>
