@@ -55,7 +55,6 @@
 							</artifactSet>
 
 							<relocations>
-
 								<!-- shade dependencies internally used by Hadoop and never exposed downstream -->
 								<relocation>
 									<pattern>org.apache.hadoop</pattern>
@@ -66,6 +65,17 @@
 								<relocation>
 									<pattern>com.qcloud.cos</pattern>
 									<shadedPattern>org.apache.flink.fs.coshadoop.shaded.com.qcloud.cos</shadedPattern>
+								</relocation>
+
+								<!-- shade Flink's Hadoop FS adapter classes, forces plugin classloader for them -->
+								<relocation>
+									<pattern>org.apache.flink.runtime.fs.hdfs</pattern>
+									<shadedPattern>org.apache.flink.fs.coshadoop.common</shadedPattern>
+								</relocation>
+								<!-- shade Flink's Hadoop FS utility classes, forces plugin classloader for them -->
+								<relocation>
+									<pattern>org.apache.flink.runtime.util</pattern>
+									<shadedPattern>org.apache.flink.fs.coshadoop.common</shadedPattern>
 								</relocation>
 
 							</relocations>
