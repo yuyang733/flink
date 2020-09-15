@@ -16,6 +16,7 @@
 
 	<properties>
 		<fs.cos.sdk.version>5.6.19</fs.cos.sdk.version>
+		<fs.cosn.version>5.8.5</fs.cosn.version>
 	</properties>
 
 	<dependencies>
@@ -48,9 +49,9 @@
 
 		<!--Hadoop's COS support package-->
 		<dependency>
-			<groupId>org.apache.hadoop</groupId>
+			<groupId>com.qcloud.cos</groupId>
 			<artifactId>hadoop-cos</artifactId>
-			<version>${fs.hadoopshaded.version}</version>
+			<version>${fs.hadoopshaded.version}-${fs.cosn.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>com.qcloud</groupId>
