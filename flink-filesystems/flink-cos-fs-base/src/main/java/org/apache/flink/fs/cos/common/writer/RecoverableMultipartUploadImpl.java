@@ -1,11 +1,13 @@
 package org.apache.flink.fs.cos.common.writer;
 
 import com.qcloud.cos.model.PartETag;
+import com.qcloud.cos.thirdparty.org.apache.commons.codec.digest.DigestUtils;
 import org.apache.flink.fs.cos.common.utils.RefCountedFSOutputStream;
 import org.apache.flink.core.fs.RecoverableFsDataOutputStream;
 
 import javax.annotation.Nullable;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -235,8 +237,12 @@ public class RecoverableMultipartUploadImpl implements RecoverableMultipartUploa
 		@Override
 		public void run() {
 			try {
+				File file1;
+				FileInputStream fileInputStream = new FileInputStream(file.getInputFile());
+				byte[] md5Hash = DigestUtils.md5(fileInputStream);
+				fileInputStream.close();
 				final PartETag result = this.cosAccessHelper.uploadPart(
-					objectName, uploadId, partNumber, file.getInputFile(), null);
+					objectName, uploadId, partNumber, file.getInputFile(), md5Hash);
 				future.complete(result);
 				file.release();
 			} catch (Throwable t) {

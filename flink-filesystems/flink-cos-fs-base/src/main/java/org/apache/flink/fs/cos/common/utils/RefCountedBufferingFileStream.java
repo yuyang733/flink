@@ -2,6 +2,8 @@ package org.apache.flink.fs.cos.common.utils;
 
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.util.function.FunctionWithException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +12,7 @@ import static org.apache.flink.util.Preconditions.checkArgument;
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 public class RefCountedBufferingFileStream extends RefCountedFSOutputStream {
+	private static final Logger LOG = LoggerFactory.getLogger(RefCountedBufferingFileStream.class);
 
 	public static final int BUFFER_SIZE = 4096;
 
@@ -78,9 +81,11 @@ public class RefCountedBufferingFileStream extends RefCountedFSOutputStream {
 
 	@Override
 	public void flush() throws IOException {
+		LOG.info("begin to flush the buffer to the file: {}.", this.currentTmpFile);
 		currentTmpFile.write(buffer, 0, positionInBuffer);
 		currentTmpFile.flush();
 		positionInBuffer = 0;
+		LOG.info("finish to flush the buffer to the file: {}.", this.currentTmpFile);
 	}
 
 	@Override
@@ -97,8 +102,10 @@ public class RefCountedBufferingFileStream extends RefCountedFSOutputStream {
 	@Override
 	public void close() {
 		if (!closed) {
+			LOG.info("begin to close the file: {}. ", this.currentTmpFile);
 			currentTmpFile.closeStream();
 			closed = true;
+			LOG.info("end to close the file: {}.", this.currentTmpFile);
 		}
 	}
 

@@ -21,7 +21,7 @@ public class RefCountedFile implements RefCounted {
 	public static RefCountedFile newFile(
 		final File file,
 		final OutputStream currentOutputStream) {
-		return new RefCountedFile(file, currentOutputStream, 0);
+		return new RefCountedFile(file, currentOutputStream, 0L);
 	}
 
 	public static RefCountedFile restoreFile(

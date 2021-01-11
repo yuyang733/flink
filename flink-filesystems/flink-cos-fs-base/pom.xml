@@ -15,8 +15,8 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<fs.cos.sdk.version>5.6.19</fs.cos.sdk.version>
-		<fs.cosn.version>5.8.5</fs.cosn.version>
+		<fs.cos.sdk.version>5.6.31</fs.cos.sdk.version>
+		<fs.cosn.version>5.8.7</fs.cosn.version>
 	</properties>
 
 	<dependencies>
