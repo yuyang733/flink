@@ -80,7 +80,9 @@ public class COSNFileSystemFactory extends AbstractCOSFileSystemFactory {
 					String value = flinkConfig.getString(key, null);
 					conf.set(key, value);
 					if (CONFIG_KEYS_TO_SHADE.contains(key)) {
-						conf.set(key, FLINK_SHADING_PREFIX + value);
+						if(value.startsWith("org.apache.hadoop")) {
+							conf.set(key, FLINK_SHADING_PREFIX + value);
+						}
 					}
 
 					LOG.debug("Adding Flink config entry for {} as {} to Hadoop config", key, conf.get(key));

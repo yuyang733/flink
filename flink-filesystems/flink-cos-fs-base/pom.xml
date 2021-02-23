@@ -9,6 +9,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
+	<groupId>com.qcloud.cos</groupId>
 	<artifactId>flink-cos-fs-base</artifactId>
 	<name>flink-cos-fs-base</name>
 
